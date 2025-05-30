@@ -1,0 +1,18 @@
+2025-05-30 17:58:49,751:__main__:Selenium triggered
+2025-05-30 18:00:00,604:__main__:No products found on page 3 for https://myallsouth.com/products?brand=aga&page=3&limit=12.
+2025-05-30 18:00:00,605:__main__:Total 24 products found for https://myallsouth.com/products?brand=aga.
+2025-05-30 18:00:34,381:__main__:Finished ThreadMain in 104.63 second(s)
+2025-05-30 18:03:28,456:__main__:Selenium triggered
+2025-05-30 18:16:37,976:__main__:Total 59 products found for https://myallsouth.com/products?brand=aga.
+2025-05-30 18:17:00,111:__main__:Finished ThreadMain in 811.66 second(s)
+2025-05-30 18:28:07,267:__main__:Selenium triggered
+2025-05-30 18:28:16,506:__main__:Total 83 products found in producturls.txt.
+2025-05-30 18:28:47,805:__main__:Selenium triggered
+2025-05-30 18:28:54,610:__main__:Total 83 products found in producturls.txt.
+2025-05-30 18:29:45,939:__main__:An error occurred while fetching product data: cannot access local variable 'product_name' where it is not associated with a value
+2025-05-30 18:30:24,973:__main__:An error occurred while fetching product data: cannot access local variable 'product_name' where it is not associated with a value
+2025-05-30 18:31:03,477:__main__:An error occurred while fetching product data: cannot access local variable 'product_name' where it is not associated with a value
+2025-05-30 18:31:15,914:__main__:An error occurred while fetching product data: cannot access local variable 'product_name' where it is not associated with a value
+2025-05-30 18:31:48,385:__main__:An error occurred while fetching product data: cannot access local variable 'product_name' where it is not associated with a value
+2025-05-30 18:32:44,857:__main__:An error occurred while fetching product data: cannot access local variable 'product_name' where it is not associated with a value
+2025-05-30 18:36:02,771:__main__:An error occurred while fetching product data: cannot access local variable 'product_name' where it is not associated with a value
