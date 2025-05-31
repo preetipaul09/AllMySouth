@@ -116,7 +116,7 @@ def getAllProUrl(driver,category_url):
         'dnt': '1',
         'upgrade-insecure-requests': '1',
         'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36',
-        'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+        'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,/;q=0.8,application/signed-exchange;v=b3;q=0.9',
         'sec-fetch-site': 'none',
         'sec-fetch-mode': 'navigate',
         'sec-fetch-dest': 'document',
@@ -131,13 +131,16 @@ def getAllProUrl(driver,category_url):
     pageNumber = 1
     while True:
         if pageNumber == 1:
-            # url = category_url
-            driver.get(category_url)
-            time.sleep(10)
+            url = category_url
         else:
             url = f'{category_url}&page={pageNumber}&limit=12'
-            driver.get(url)
-            time.sleep(10)
+
+        print(f"Fetching page {pageNumber}: {url}")
+        driver.get(url)
+        time.sleep(10)
+
+        soup = BeautifulSoup(driver.page_source, 'html.parser')
+        products = soup.select('a.css-17vbkdo.eyc351s2')
         # try:
         #     response = requests.get(url, headers=headers,params=params ,timeout=10)
         #     response.raise_for_status()
@@ -150,25 +153,31 @@ def getAllProUrl(driver,category_url):
         # exit()
         products = soup.select('a.css-17vbkdo.eyc351s2')
 
+        count_before = len(product_urls)
+
         if not products:
-            logger.debug(f"No products found on page {pageNumber} for {url}.")
+            print(f"No products found on page {pageNumber}. Exiting.")
             break
 
         for product in products:
             href = product.get('href')
             if href:
-                product_url = vendor_url + href if not href.startswith('http') else href
+                product_url = href if href.startswith('http') else f"https://myallsouth.com{href}"
                 if product_url not in product_urls:
                     product_urls.add(product_url)
                     with open("productUrls(preeti).txt", "a", encoding="utf-8") as f:
                         f.write(product_url + '\n')
 
-        print(f"[Page {pageNumber}] Total unique product URLs found so far: {len(product_urls)}")
-
-        pageNumber += 1
-        if pageNumber == 50:
+        count_after = len(product_urls)
+        if count_after == count_before:
+            print(f"No new products found on page {pageNumber}. Assuming end of listing.")
             break
+
+        print(f"[Page {pageNumber}] Total unique product URLs found so far: {count_after}")
+        pageNumber += 1
+
         time.sleep(2)
+
     return product_urls
 
 def fetch_product_data(driver,product_url,vendor_id):
